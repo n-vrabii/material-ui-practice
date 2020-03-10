@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Container } from '@material-ui/core';
+import { makeStyles, Container, Box } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -14,10 +14,10 @@ export function MobileNav() {
   const classes = useStyles();
 
   return (
-    <Container>
-      <nav className={classes.nav}>
+    <Box className={classes.nav}>
+      <Container>
         Nav Bar Mobile
-    </nav>
-    </Container>
+      </Container>
+    </Box>
   )
 }

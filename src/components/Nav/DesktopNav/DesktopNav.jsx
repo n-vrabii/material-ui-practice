@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Container } from '@material-ui/core';
+import { makeStyles, Container, Box } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -17,10 +17,10 @@ export function DesktopNav() {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="md">
-      <nav className={classes.nav}>
+    <Box className={classes.nav}>
+      <Container maxWidth="md">
         Nav Bar Desktop
-      </nav>
-    </Container>
+      </Container>
+    </Box>
   )
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { Form } from './components/Form/Form';
+
 import { Hidden } from '@material-ui/core';
 
-import { DesktopNav } from './components/Nav/DesktopNav/DesktopNav';
-import { MobileNav } from './components/Nav/MobileNav/MobileNav';
+import { DesktopNav } from '../../components/Nav/DesktopNav/DesktopNav';
+import { MobileNav } from '../../components/Nav/MobileNav/MobileNav';
 
-function App() {
+export function Layout(props) {
   return (
     <React.Fragment>
       <CssBaseline />
@@ -16,10 +16,9 @@ function App() {
       <Hidden mdUp>
         <MobileNav />
       </Hidden>
-      <Form />
+      {
+        props.children
+      }
     </React.Fragment>
-
-  );
+  )
 }
-
-export default App;
