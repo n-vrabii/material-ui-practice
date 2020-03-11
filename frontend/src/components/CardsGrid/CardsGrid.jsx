@@ -1,7 +1,9 @@
 import React from 'react'
-import { makeStyles, Container, Grid } from '@material-ui/core'
+import { makeStyles, Container, Grid, Typography } from '@material-ui/core'
 
 import { ProductCard } from './'
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export function CardsGrid() {
 
@@ -13,48 +15,46 @@ export function CardsGrid() {
 
   const classes = useStyles();
 
-  const cardsInfo = [
-    {
-      id: 0,
-      model: 'Prius',
-      brand: 'Toyota',
-      year: 2019,
-      img: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-toyota-prius-limited-1545163015.jpg'
-    },
-    {
-      id: 1,
-      model: 'Camry',
-      brand: 'Toyota',
-      year: 2019,
-      img: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2018-toyota-camry-mmp-1544816921.jpg'
-    },
-    {
-      id: 2,
-      model: 'Corolla',
-      brand: 'Toyota',
-      year: 2019,
-      img: 'https://static.bangkokpost.com/media/content/20191002/3351694.jpg'
-    },
-    {
-      id: 3,
-      model: 'Supra',
-      brand: 'Toyota',
-      year: 2019,
-      img: 'https://img-c.drive.ru/models.large.main.images/0000/000/000/001/58b/48d7216d1dc8ce7f-main.jpg'
-    },
-  ];
+  const [carsInfo, setCarsInfo] = useState([]);
+  const [fetchError, setFetchError] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("http://localhost:3001/api/v1/cars");
+
+      res
+        .json()
+        .then(res => {
+          const data = res;
+          console.log(data);
+          setCarsInfo(data);
+        })
+        .catch(err => {
+          console.log(err);
+          setFetchError(true);
+        });
+    }
+
+    fetchData();
+
+  }, []);
 
   return (
     <React.Fragment>
-      <Container className={classes.root} maxWidth="md">
-        <Grid container spacing={3}>
-          {cardsInfo.map((data, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <ProductCard {...data} />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </React.Fragment>
+      {fetchError
+        ? (<Container>
+          <Typography>Error : (</Typography>
+        </Container>)
+        : (<Container className={classes.root} maxWidth="md">
+          <Grid container spacing={3}>
+            {carsInfo.map((data, index) => (
+              <Grid item xs={12} sm={6} md={3} key={index}>
+                <ProductCard {...data} />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>)
+      }
+    </React.Fragment >
   )
 }
