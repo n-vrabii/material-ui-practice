@@ -2,9 +2,11 @@ import React from 'react'
 import { makeStyles, Button, IconButton, AppBar, Typography, Toolbar } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 
+import { userRoles } from '../../constants';
+
 export function Header(props) {
 
-  const { buttonIsDisplayed } = props;
+  const { userRole, dispatchApp, title = null } = props;
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,12 +25,14 @@ export function Header(props) {
   return (
     <AppBar position="static" className={classes.root}>
       <Toolbar>
-        <IconButton aria-label="Menu" className={classes.menuButton}>
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" color="inherit" className={classes.title} >Nav Bar Desktop</Typography>
+        <Typography variant="h6" color="inherit" className={classes.title} >{title}</Typography>
 
-        {buttonIsDisplayed ? <Button color="inherit">Log in</Button> : null}
+        {userRole !== userRoles.GUEST ?
+          (<Button
+            color="inherit"
+            onClick={() => dispatchApp({ type: "userRole", value: userRoles.GUEST })}>
+            Log out
+          </Button>) : null}
       </Toolbar>
     </AppBar>
   )

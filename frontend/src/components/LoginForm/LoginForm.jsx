@@ -1,9 +1,10 @@
-import React from 'react';
-
-import { useForm } from './useForm';
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { Button, Grid, Paper, FormControl, TextField } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 
-import { Button, Grid, Paper, FormControl, TextField } from '@material-ui/core';
+import { useForm } from './useForm'
+import { userRoles, routes } from '../../constants'
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -21,7 +22,9 @@ const useStyle = makeStyles((theme) => ({
   }
 }));
 
-export function LoginForm() {
+export function LoginForm(props) {
+
+  const { dispatchApp } = props;
 
   const classes = useStyle();
 
@@ -33,6 +36,8 @@ export function LoginForm() {
   }
 
   const [state, dispatch] = useForm(initialState);
+
+  const history = useHistory();
 
   return (
     <Paper className={classes.root}>
@@ -72,7 +77,11 @@ export function LoginForm() {
               variant="contained"
               color="primary"
               disabled={state.buttonIsDisabled}
-              href={state.buttonIsDisabled ? null : "/quiz"}>
+              // href={state.buttonIsDisabled ? null : "/quiz"}
+              onClick={state.buttonIsDisabled ? null : async () => {
+                dispatchApp({ type: "userRole", value: userRoles.USER });
+                await setTimeout(() => { history.push(routes.HOME) }, 300);
+              }}>
               Submit
                 </Button>
 
