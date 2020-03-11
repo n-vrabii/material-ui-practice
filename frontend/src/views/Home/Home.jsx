@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 import { Layout } from '../../layouts/Layout'
 import { CardsFilter } from '../../components/CardsFilter'
+import { CardsGrid } from '../../components/CardsGrid'
 import { strings, userRoles, routes } from '../../constants'
 
 export function Home(props) {
@@ -17,6 +18,7 @@ export function Home(props) {
     return (
       <Layout title={strings.homePageTitle()} dispatchApp={dispatchApp} userRole={userRole}>
         <CardsFilter />
+        <CardsGrid />
       </Layout>
     )
   }

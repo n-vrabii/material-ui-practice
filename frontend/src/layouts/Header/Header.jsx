@@ -1,6 +1,5 @@
 import React from 'react'
-import { makeStyles, Button, IconButton, AppBar, Typography, Toolbar } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import { makeStyles, Button, AppBar, Typography, Toolbar } from '@material-ui/core'
 
 import { userRoles } from '../../constants';
 
