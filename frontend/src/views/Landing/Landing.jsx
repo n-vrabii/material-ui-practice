@@ -1,11 +1,11 @@
 import React from 'react';
-import { Form } from '../../components/Form/Form';
-import { Layout } from '../../layouts/Layout/Layout';
+import { LoginForm } from '../../components/LoginForm';
+import { Layout } from '../../layouts/Layout';
 
 function Landing() {
   return (
-    <Layout>
-      <Form />
+    <Layout isLoginPage={true}>
+      <LoginForm />
     </Layout>
   );
 }

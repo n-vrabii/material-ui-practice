@@ -3,14 +3,14 @@ import React from 'react';
 import { useForm } from './useForm';
 import { makeStyles } from '@material-ui/core/styles'
 
-import { Button, Grid, Container, FormControl, TextField } from '@material-ui/core';
+import { Button, Grid, Paper, FormControl, TextField } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => ({
-  formContainer: {
+  root: {
+    display: 'block',
     padding: `${theme.spacing(4)}px ${theme.spacing(2)}px`,
-    border: '2px solid #eee',
     borderRadius: '8px',
-    marginTop: theme.spacing(5),
+    margin: `${theme.spacing(5)}px auto 0px auto`,
     maxWidth: '420px',
   },
   buttonWrapper: {
@@ -21,7 +21,7 @@ const useStyle = makeStyles((theme) => ({
   }
 }));
 
-export function Form() {
+export function LoginForm() {
 
   const classes = useStyle();
 
@@ -35,7 +35,7 @@ export function Form() {
   const [state, dispatch] = useForm(initialState);
 
   return (
-    <Container className={classes.formContainer}>
+    <Paper className={classes.root}>
       <FormControl >
         <Grid container
           spacing={2}
@@ -76,7 +76,6 @@ export function Form() {
               Submit
                 </Button>
 
-
             <Button
               className={classes.cancelButton}
               color="secondary"
@@ -86,6 +85,6 @@ export function Form() {
           </Grid>
         </Grid>
       </FormControl>
-    </Container >
+    </Paper >
   )
 }
