@@ -1,3 +1,4 @@
 import { CardsFilter } from './CardsFilter'
+import { FilterCriterion } from './FilterCriterion'
 
-export { CardsFilter }
+export { CardsFilter, FilterCriterion }

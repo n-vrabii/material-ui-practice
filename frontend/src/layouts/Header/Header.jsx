@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { makeStyles, Button, AppBar, Typography, Toolbar } from '@material-ui/core'
 
-import { userRoles } from '../../constants';
+import { AuthContext } from '../../App'
+
+import { userRoles } from '../../constants'
 
 export function Header(props) {
 
-  const { userRole, dispatchApp, title = null } = props;
+  const { title = null } = props;
+  const { userRole, dispatchApp } = useContext(AuthContext);
 
   const useStyles = makeStyles((theme) => ({
     root: {

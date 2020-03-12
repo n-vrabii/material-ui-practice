@@ -8,7 +8,9 @@ import { Login } from './views/Login';
 import { Home } from './views/Home';
 import { userRoles, routes } from './constants';
 
-export default function App() {
+export const AuthContext = React.createContext({});
+
+export function App() {
 
   // fetch role from somewhere
   const [state, dispatch] = useAppState({ userRole: localStorage.getItem("userRole") || userRoles.GUEST });
@@ -18,26 +20,27 @@ export default function App() {
   }, [state.userRole]);
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path={routes.LOGIN} component={() => <Login userRole={state.userRole} dispatchApp={dispatch} />} />
-        <Route exact path={routes.HOME} component={() => <Home userRole={state.userRole} dispatchApp={dispatch} />} />
-      </Switch>
-    </Router>
+    <AuthContext.Provider value={{ userRole: state.userRole, dispatchApp: dispatch }}>
+      <Router>
+        <Switch>
+          <Route exact path={routes.LOGIN} component={() => <Login />} />
+          <Route exact path={routes.HOME} component={() => <Home />} />
+        </Switch>
+      </Router>
+    </AuthContext.Provider>
   )
 }
 
-function useAppState(prevState) {
+function useAppState(initState) {
 
   const [state, dispatch] = useReducer((state, action) => {
-    console.log(action);
     switch (action.type) {
       case "userRole":
         return { ...state, userRole: action.value }
       default:
         return state
     }
-  }, prevState);
+  }, initState);
 
   return [state, dispatch];
 }

@@ -26,11 +26,9 @@ export function CardsGrid() {
         .json()
         .then(res => {
           const data = res;
-          console.log(data);
           setCarsInfo(data);
         })
         .catch(err => {
-          console.log(err);
           setFetchError(true);
         });
     }

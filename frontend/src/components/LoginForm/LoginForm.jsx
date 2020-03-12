@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button, Grid, Paper, FormControl, TextField } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+
+
+import { AuthContext } from '../../App'
 
 import { useForm } from './useForm'
 import { userRoles, routes } from '../../constants'
@@ -24,7 +27,7 @@ const useStyle = makeStyles((theme) => ({
 
 export function LoginForm(props) {
 
-  const { dispatchApp } = props;
+  const { dispatchApp } = useContext(AuthContext);
 
   const classes = useStyle();
 
